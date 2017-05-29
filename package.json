@@ -1,0 +1,21 @@
+{
+  "name": "bernard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bootswatch": "^3.3.7",
+    "chart.js": "^2.5.0",
+    "jquery": "^3.2.1",
+    "plotly.js": "^1.27.1"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "whs"
+  },
+  "author": "Marc Hosy",
+  "license": "ISC"
+}
