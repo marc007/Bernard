@@ -1,6 +1,9 @@
 #npm
 node_modules/
 
+#perso
+*.xlsx
+
 # Build and Release Folders
 bin/
 bin-debug/
