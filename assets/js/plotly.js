@@ -1,9 +1,38 @@
 $(function(){
 
+  function testfetch() {
+    fetch(
+      'https://www.quandl.com/api/v3/datasets/EOD/KO/data.json?order=asc&start_date=2017-01-01&api_key=auKgx8jNoKEY7q-6QxNf',
+      {
+        headers: {
+          'Access-Control-Allow-Origin':'*'
+        }
+      }
+    )
+      .then(
+        function(response) {
+          if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +  response.status);
+            return;
+          }
+          // Examine the text in the response
+          response.json().then(function(data) {
+            console.log(data);
+            var ctx = 'myPlotly';
+            draw(ctx, data);
+          });
+        }
+      )
+      .catch(function(err) {
+        console.log('Fetch Error :-S', err);
+      });
+  };
+
+
   $.ajax({
     //url: "https://www.quandl.com/api/v3/datasets/WIKI/FB/data.json?column_index=1&order=asc&api_key=auKgx8jNoKEY7q-6QxNf",
     //url: "https://www.quandl.com/api/v3/datasets/CBOE/VIX_PC/data.json?order=asc&start_date=2015-01-01&api_key=auKgx8jNoKEY7q-6QxNf",
-    url: "https://www.quandl.com/api/v3/datasets/EOD/KO/data.json?order=asc&start_date=2015-01-01&api_key=auKgx8jNoKEY7q-6QxNf",
+    url: "https://www.quandl.com/api/v3/datasets/EOD/KO/data.json?order=asc&start_date=2017-01-01&api_key=auKgx8jNoKEY7q-6QxNf",
     headers: {
       'Access-Control-Allow-Origin':'*'
     },
@@ -16,6 +45,7 @@ $(function(){
         alert('hoops!'+ajaxOptions);
     }
   });
+
 
   function draw(ctx, data) {
     var chartlabels = [];
