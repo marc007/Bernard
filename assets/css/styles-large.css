@@ -1,3 +1,13 @@
 h1 {
   color: red;
 }
+
+body {
+  font-size: 3.0em;
+}
+
+article {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
