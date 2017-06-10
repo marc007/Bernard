@@ -28,7 +28,6 @@ $(function(){
       });
   };
 
-
   $.ajax({
     //url: "https://www.quandl.com/api/v3/datasets/WIKI/FB/data.json?column_index=1&order=asc&api_key=auKgx8jNoKEY7q-6QxNf",
     //url: "https://www.quandl.com/api/v3/datasets/CBOE/VIX_PC/data.json?order=asc&start_date=2015-01-01&api_key=auKgx8jNoKEY7q-6QxNf",
@@ -45,7 +44,6 @@ $(function(){
         alert('hoops!'+ajaxOptions);
     }
   });
-
 
   function draw(ctx, data) {
     var chartlabels = [];
@@ -85,35 +83,34 @@ $(function(){
       mode: 'lines+markers'
     };
 
-  /*
-  var trace1 = {
-    x: [1, 2, 3, 4],
-    y: [10, 15, 13, 17],
-    mode: 'lines+markers'
-  };
-  var trace2 = {
-    x: [2, 3, 4, 5],
-    y: [16, 5, 11, 10],
-    mode: 'lines'
-  };
-  var trace3 = {
-    x: [1, 2, 3, 4],
-    y: [12, 9, 15, 12],
-    mode: 'lines+markers'
-  };
+    var data = [ trace1, trace2, trace3, trace4 ];
 
-  var data = [ trace1, trace2, trace3 ];
-*/
+    var layout = {
+      title:'Historical VIX',
+      width:700
+    };
 
-  var data = [ trace1, trace2, trace3, trace4 ];
+    var myPlot = document.getElementById(ctx);
 
-  var layout = {
-    title:'Historical VIX',
-    height: 600,
-    width: 1200
-  };
+    Plotly.newPlot(ctx, data, layout);
 
-  Plotly.newPlot(ctx, data, layout);
-}
+    myPlot.on('plotly_click', function(data){
+      var pn='',
+          tn='',
+          colors=[];
+      for(var i=0; i < data.points.length; i++){
+        pn = data.points[i].pointNumber;
+        tn = data.points[i].curveNumber;
+        //colors = data.points[i].data.marker.color;
+      };
+      colors[pn] = '#C54C82';
+
+      var update = {'marker':{color: colors, size:16}};
+      Plotly.restyle(ctx, update, [tn]);
+     });
+
+  }
+
+
 
 });
